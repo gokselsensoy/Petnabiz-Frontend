@@ -1,0 +1,86 @@
+<c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header ngPreserveWhitespaces>
+        <strong>Evcil hayvan kaydı</strong>
+      </c-card-header>
+      <c-card-body>
+          <form [formGroup]="examinationAddForm" cForm class="row g-3 needs-validation" ngNativeValidate>
+            <c-col md="4" hidden>
+              <label cLabel for="validationServer01">Randevu alınan tarih</label>
+              <input 
+                     cFormControl
+                     readonly
+                     formControlName="examinationDate"
+                     id="validationServer01"
+                     required
+                     type="datetime-local"
+              />
+              <c-form-feedback [valid]="true">Looks good!</c-form-feedback>
+            </c-col>
+            <c-col md="4" hidden>
+              <label cLabel for="validationServer03">Kullanıcı</label>
+              <input cFormControl formControlName="appUserId" id="validationServer03" required type="text" />
+              <c-form-feedback [valid]="false">Please provide a valid city.</c-form-feedback>
+            </c-col>
+            <c-col md="4">
+              <label cLabel for="validationServer02">Klinik Id</label>
+              <input 
+                     readonly
+                     cFormControl
+                     formControlName="veterinaryClinicId"
+                     id="validationServer02"
+                     required
+                     type="text"
+              />
+              <c-form-feedback [valid]="true">Looks good!</c-form-feedback>
+            </c-col>
+            <c-col md="4">
+              <label cLabel for="validationServerUsername">Muayeneye gelen müşteri</label>
+              <c-input-group class="has-validation">
+                <select cSelect formControlName="appUserId" (change)="OnUserChange()">
+                  <option value="" disabled selected>Müşteri</option>
+                  <option *ngFor="let user of users" required [value]="user.id">{{user.name}}</option>
+                </select>
+              </c-input-group>
+            </c-col>
+            <c-col md="4">
+              <label cLabel for="validationServerUsername">Muayene olan evcil hayvan</label>
+              <c-input-group class="has-validation">
+                <select cSelect formControlName="petId">
+                  <option value="" disabled selected>Evcil Hayvan</option>
+                  <option *ngFor="let pet of pets" required [value]="pet.id">{{pet.name}}</option>
+                </select>
+              </c-input-group>
+            </c-col>
+            <c-col md="4">
+                <label cLabel for="validationServerUsername">Muayeneye giren veteriner</label>
+                <c-input-group class="has-validation">
+                  <select cSelect formControlName="vetId">
+                    <option value="" disabled selected>Veteriner</option>
+                    <option *ngFor="let vet of vets" required [value]="vet.id">{{vet.firstName + ' ' + vet.lastName	}}</option>
+                  </select>
+                </c-input-group>
+              </c-col>
+              <c-col md="4">
+                <label cLabel for="validationServerUsername">Randevu</label>
+                <c-input-group class="has-validation">
+                  <select cSelect formControlName="appointmentId">
+                    <option value="" disabled selected>Alınan randevu</option>
+                    <option *ngFor="let appointment of appointments" required [value]="appointment.id">{{appointment.appointmentDate}}</option>
+                  </select>
+                </c-input-group>
+              </c-col>
+            <c-col md="6">
+              <label cLabel for="validationServer03">Açıklama</label>
+              <input cFormControl formControlName="description" id="validationServer03" required type="text" />
+              <c-form-feedback [valid]="false">Please provide a valid city.</c-form-feedback>
+            </c-col>
+            <c-col xs="12">
+              <button (click)="add()" cButton color="primary" type="submit">
+                Muayene Ekle
+              </button>
+            </c-col>
+          </form>
+      </c-card-body>
+    </c-card>
+  </c-col>

@@ -1,0 +1,49 @@
+<div class="fade-in">
+    <c-card class="mb-4">
+      <c-card-header>
+        Kliniğime katılı müşterilerim
+      </c-card-header>
+      <c-card-body>
+        <c-row>
+        <c-col xs>
+          <c-card class="mb-4">
+            <c-card-body>
+              <table
+                [hover]="true"
+                [responsive]="true"
+                [striped]="true"
+                align="middle"
+                cTable
+                class="mb-0 border"
+              >
+                <thead cTableColor="light">
+                  <tr>
+                    <th class="text-center">
+                      <svg cIcon name="cilPeople"></svg>
+                    </th>
+                    <th>Ad Soyad</th>
+                    <th>Email</th>           
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of patients">
+                    <td class="text-center">
+                      <img src="" alt="">
+                    </td>
+                    <td>
+                      <div>{{ user.name + ' ' + user.surname }}</div>
+                    </td>
+                    <td>
+                      <div>{{ user.email }}</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </c-card-body>
+          </c-card>
+        </c-col>
+      </c-row>
+      </c-card-body>
+    </c-card>
+  </div>
+  

@@ -1,0 +1,342 @@
+<c-row ngPreserveWhitespaces>
+  <c-col>
+    <c-card>
+      <c-card-header>
+        <strong>Muayenelerim</strong>
+      </c-card-header>
+      <c-card-body>
+        <p class="text-medium-emphasis small">
+          Detayları görmek için tıklayınız.
+        </p>
+        <app-docs-callout>
+          <c-accordion>
+            <c-accordion-item #item1="cAccordionItem" [visible]="false" *ngFor="let pet of pets">
+              <ng-template cTemplateId="accordionHeaderTemplate">
+                <button
+                  (click)="item1.toggleItem()"
+                  [collapsed]="!item1.visible"
+                  cAccordionButton
+                >
+                  {{pet.name}}
+                </button>
+              </ng-template>
+              <ng-template cTemplateId="accordionBodyTemplate">
+                <div class="accordion-body">
+                <table
+                [hover]="true"
+                [responsive]="true"
+                [striped]="true"
+                align="middle"
+                cTable
+                class="mb-0 border"
+              >
+                <thead cTableColor="light">
+                  <tr>
+                    <th class="text-center">
+                      <svg cIcon name="cilPeople"></svg>
+                    </th>
+                    <th>Muayene Tarihi</th>
+                    <th class="text-center">Açıklama</th>
+                    <th>Şehir</th>   
+                    <th>İlçe</th>   
+                    <th>Klinik</th>   
+                    <th>Veteriner</th>                    
+                  </tr>
+                </thead>
+                <tbody *ngIf="dataLoaded == true">
+                  <tr *ngFor="let petExamination of petExaminationDetails[pet.id]">
+                    <td class="text-center">
+                      <img src="" alt="">
+                    </td>
+                    <td>
+                      <div>{{ petExamination.examinationDate }}</div>
+                    </td>
+                    <td class="text-center">
+                      <div>{{ petExamination.description }}</div>
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-between">
+                        {{ petExamination.city }}
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-between">
+                        {{ petExamination.district }}
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-between">
+                        {{ petExamination.clinicName }}
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-between">
+                        {{ petExamination.vetName }}
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+              </ng-template>
+            </c-accordion-item>
+          </c-accordion>
+        </app-docs-callout>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+
+<!-- <c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <app-docs-callout
+      href="components/accordion"
+      name="Accordion"
+    ></app-docs-callout>
+  </c-col>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Angular Accordion</strong>
+      </c-card-header>
+      <c-card-body>
+        <p class="text-medium-emphasis small">
+          Click the accordions below to expand/collapse the accordion content.
+        </p>
+        <app-docs-example href="components/accordion">
+          <c-accordion
+            [alwaysOpen]="false"
+            [flush]="false"
+            class="shadow rounded-2"
+          >
+            <c-accordion-item #item0="cAccordionItem" [visible]="false">
+              <ng-template cTemplateId="accordionHeaderTemplate">
+                <button
+                  (click)="item0.toggleItem()"
+                  [collapsed]="!item0.visible"
+                  cAccordionButton
+                  cBgColor="info"
+                >
+                  Accordion item #0
+                </button>
+              </ng-template>
+              <ng-template cTemplateId="accordionBodyTemplate">
+                <div
+                  [innerHTML]="getAccordionBodyText('first')"
+                  cBgColor="info"
+                  class="accordion-body"
+                ></div>
+              </ng-template>
+            </c-accordion-item>
+            <c-accordion-item #item1="cAccordionItem" [visible]="false">
+              <ng-template cTemplateId="accordionHeaderTemplate">
+                <button
+                  (click)="item1.toggleItem()"
+                  [collapsed]="!item1.visible"
+                  cAccordionButton
+                >
+                  Accordion item #1
+                </button>
+              </ng-template>
+              <ng-template cTemplateId="accordionBodyTemplate">
+                <div class="accordion-body">
+                  <strong
+                    >This is the
+                    <mark>#second</mark>
+                    item accordion body.</strong
+                  >
+                  It is hidden by default, until the collapse plugin adds the
+                  appropriate classes that we use to style each element. These
+                  classes control the overall appearance, as well as the showing
+                  and hiding via CSS transitions. You can modify any of this
+                  with custom CSS or overriding our default variables. It&#39;s
+                  also worth noting that just about any HTML can go within the
+                  <code>.accordion-body</code>, though the transition does limit
+                  overflow.
+                </div>
+              </ng-template>
+            </c-accordion-item>
+            <c-accordion-item #item2="cAccordionItem" [visible]="false">
+              <ng-template cTemplateId="accordionHeaderTemplate">
+                <button
+                  (click)="item2.toggleItem()"
+                  [collapsed]="!item2.visible"
+                  cAccordionButton
+                >
+                  Accordion item #2
+                </button>
+              </ng-template>
+              <ng-template cTemplateId="accordionBodyTemplate">
+                <div class="accordion-body">
+                  <span [innerHTML]="getAccordionBodyText('third')"></span>
+                </div>
+              </ng-template>
+            </c-accordion-item>
+          </c-accordion>
+        </app-docs-example>
+      </c-card-body>
+    </c-card>
+    <c-card class="mb-4">
+      <c-card-header> <strong>Angular Accordion</strong> flush </c-card-header>
+      <c-card-body>
+        <p class="text-medium-emphasis small">
+          Click the accordions below to expand/collapse the accordion content.
+        </p>
+        <app-docs-example href="components/accordion#flush">
+          <c-accordion [flush]="true">
+            <c-accordion-item visible>
+              <ng-template cTemplateId="accordionHeader">
+                Accordion item #0
+              </ng-template>
+              <ng-template cTemplateId="accordionBody">
+                <span [innerHTML]="getAccordionBodyText('first')"></span>
+              </ng-template>
+            </c-accordion-item>
+            <c-accordion-item [visible]="false">
+              <ng-template cTemplateId="accordionHeader">
+                Accordion item #1
+              </ng-template>
+              <ng-template cTemplateId="accordionBody">
+                <span [innerHTML]="getAccordionBodyText('second')"></span>
+              </ng-template>
+            </c-accordion-item>
+            <c-accordion-item [visible]="false">
+              <ng-template cTemplateId="accordionHeader">
+                Accordion item #2
+              </ng-template>
+              <ng-template cTemplateId="accordionBody">
+                <span [innerHTML]="getAccordionBodyText('third')"></span>
+              </ng-template>
+            </c-accordion-item>
+          </c-accordion>
+        </app-docs-example>
+      </c-card-body>
+    </c-card>
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Angular Accordion</strong> alwaysOpen
+      </c-card-header>
+      <c-card-body>
+        <app-docs-example href="components/accordion#always-open">
+          <c-accordion
+            [alwaysOpen]="true"
+            class="shadow accordion-custom rounded-2"
+          >
+            <c-accordion-item
+              *ngFor="let item of items; let i = index"
+              [visible]="i === 1"
+            >
+              <ng-template cTemplateId="accordionHeader">
+                Custom Accordion item #{{ i }}
+              </ng-template>
+              <ng-template cTemplateId="accordionBody">
+                <small
+                  ><i>{{ i }}.</i></small
+                >
+                <span [innerHTML]="getAccordionBodyText(i.toString())"></span>
+              </ng-template>
+            </c-accordion-item>
+          </c-accordion>
+        </app-docs-example>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row> -->
+
+
+
+<!-- <div class="fade-in">
+  <c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <app-docs-callout href="components/breadcrumb" name="Breadcrumb"></app-docs-callout>
+    </c-col>
+    <c-col class="mb-4" xs="12">
+      <c-card>
+        <c-card-header>
+          <strong>Angular Breadcrumbs</strong>
+        </c-card-header>
+        <c-card-body>
+          <p class="text-medium-emphasis small">
+            The breadcrumb navigation provides links back to each previous page the user navigated
+            through and shows the current location in a website or an application. You don’t have
+            to add separators, because they automatically added in CSS through
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::before">
+              <code>::before</code>
+            </a>
+            and
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/content">
+              <code>content</code>
+            </a>
+            .
+          </p>
+          <app-docs-example href="components/breadcrumb">
+            <c-breadcrumb class="mb-2">
+              <c-breadcrumb-item *ngFor="let item of items; index as i; last as isLast"
+                                 [active]="isLast"
+                                 [url]="item.url">
+                {{item.label}}
+              </c-breadcrumb-item>
+            </c-breadcrumb>
+            <hr>
+            <c-breadcrumb class="mb-2">
+              <c-breadcrumb-item *ngFor="let item of items.slice(0,1); index as i; last as isLast"
+                                 [active]="isLast"
+                                 [url]="item.url">
+                {{item.label}}
+              </c-breadcrumb-item>
+            </c-breadcrumb>
+            <c-breadcrumb class="mb-2">
+              <c-breadcrumb-item *ngFor="let item of items.slice(0,2); index as i; last as isLast"
+                                 [active]="isLast"
+                                 [url]="item.url">
+                {{item.label}}
+              </c-breadcrumb-item>
+            </c-breadcrumb>
+            <c-breadcrumb class="mb-2">
+              <c-breadcrumb-item *ngFor="let item of items.slice(0,3); index as i; last as isLast"
+                                 [active]="isLast"
+                                 [url]="item.url">
+                {{item.label}}
+              </c-breadcrumb-item>
+            </c-breadcrumb>
+            <c-breadcrumb class="mb-2">
+              <c-breadcrumb-item *ngFor="let item of items.slice(0,4); index as i; last as isLast"
+                                 [active]="isLast"
+                                 [url]="item.url">
+                <span [ngClass]="{'mark': isLast}">{{item.label}}</span>
+              </c-breadcrumb-item>
+            </c-breadcrumb>
+            <hr>
+            <c-breadcrumb class="mb-0">
+              <c-breadcrumb-item url="/">
+                Home
+              </c-breadcrumb-item>
+              <c-breadcrumb-item url="/">
+                Library
+              </c-breadcrumb-item>
+              <c-breadcrumb-item url="/">
+                Data
+              </c-breadcrumb-item>
+              <c-breadcrumb-item [active]="true">
+                Bootstrap
+              </c-breadcrumb-item>
+            </c-breadcrumb>
+          </app-docs-example>
+        </c-card-body>
+      </c-card>
+    </c-col>
+    <c-col xs="12">
+      <c-card>
+        <c-card-header>
+          <strong>Angular Breadcrumbs</strong> <small>router</small>
+        </c-card-header>
+        <c-card-body>
+          <app-docs-example href="components/breadcrumb#router">
+            <c-breadcrumb-router></c-breadcrumb-router>
+            <c-breadcrumb-router [items]="items"></c-breadcrumb-router>
+          </app-docs-example>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+</div> -->

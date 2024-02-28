@@ -1,0 +1,34 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col lg="7" md="9" xl="6">
+        <c-card class="mx-4">
+          <c-card-body class="p-4">
+            <form cForm [formGroup]="confirmForm">
+              <c-input-group class="mb-3">
+                <span cInputGroupText>&#64;</span>
+                <input
+                  autoComplete="email"
+                  cFormControl
+                  formControlName="email"
+                  placeholder="Email"
+                />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <input
+                  autoComplete="confirmcode"
+                  cFormControl
+                  formControlName="confirmCode"
+                  placeholder="Emailinize gelen kod"
+                />
+              </c-input-group>
+              <div class="d-grid">
+                <button cButton color="success" (click)="confirm()">Onayla</button>
+              </div>
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>
